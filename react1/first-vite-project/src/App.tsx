@@ -10,6 +10,32 @@ const DUMMY_LIST = ["spain", "france", "uk"];
 
 function App() {
   const [alertShown, setAlertShown] = useState(false);
+  const [game, setGame] = useState({
+    id: 1,
+    player: { name: "John", age: 21 },
+  });
+  const [pizza, setPizza] = useState({
+    name: "Pepperoni",
+    toppings: ["cheese", "tomato"],
+  });
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "product 1", quantity: 1 },
+      { id: 1, title: "product 1", quantity: 1 },
+    ],
+  });
+
+  const handleAddProduct = () => {
+    setCart({
+      ...cart,
+      items: [{ ...[cart.items][0] }, { ...[cart.items][1], quantity: 2 }],
+    });
+  };
+
+  const handleAddTopping = () => {
+    setPizza({ ...pizza, toppings: [...pizza.toppings, "new topping"] });
+  };
 
   const handleShowAlert = () => {
     setAlertShown(true);
@@ -17,6 +43,10 @@ function App() {
 
   const handleHideAlert = () => {
     setAlertShown(false);
+  };
+
+  const handleUpdateGame = () => {
+    setGame({ ...game, player: { ...game.player, age: 22 } });
   };
 
   return (
@@ -27,6 +57,9 @@ function App() {
       <Button color="danger" onClick={handleShowAlert}>
         Click me!
       </Button> */}
+      <button onClick={handleUpdateGame}>update game</button>
+      <button onClick={handleAddTopping}>add topping</button>
+      <button onClick={handleAddProduct}>add topping</button>
     </>
   );
 }
