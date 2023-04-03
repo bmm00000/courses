@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 
 import ListGroup from "./components/ListGroup";
+import { ExpandableText } from "./components/ExpandableText";
 // import Alert from "./components/Alert";
 // import Button from "./components/Button";
 // import "./App.css";
@@ -51,15 +52,16 @@ function App() {
 
   return (
     <>
-      <AiFillLike onClick={() => console.log("clicked!")} />
-      <ListGroup heading="Countries" items={DUMMY_LIST} />
+      {/* <AiFillLike onClick={() => console.log("clicked!")} />
+      <ListGroup heading="Countries" items={DUMMY_LIST} /> */}
       {/* {alertShown && <Alert onHide={handleHideAlert}>Watch out!</Alert>}
       <Button color="danger" onClick={handleShowAlert}>
         Click me!
       </Button> */}
-      <button onClick={handleUpdateGame}>update game</button>
+      {/* <button onClick={handleUpdateGame}>update game</button>
       <button onClick={handleAddTopping}>add topping</button>
-      <button onClick={handleAddProduct}>add topping</button>
+      <button onClick={handleAddProduct}>add topping</button> */}
+      <ExpandableText characters={10} />
     </>
   );
 }
