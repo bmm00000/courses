@@ -13,10 +13,18 @@ test("should display two inputs and one button", () => {
 });
 
 it("should call onAddUser when form is submitted", async () => {
-  const mockOnAddUser = jest.fn(() => {});
+  const mockOnAddUser = jest.fn();
+
+  //   const argsList = [];
+  //   const mockOnAddUser = (...args) => {
+  //     argsList.push(args);
+  //   };
+
   render(<UserForm onAddUser={mockOnAddUser} />);
 
-  const [nameInput, emailInput] = screen.getAllByRole("textbox");
+  const nameInput = screen.getByRole("textbox", { name: /name/i });
+  const emailInput = screen.getByRole("textbox", { name: /email/i });
+
   await userEvent.click(nameInput);
   await userEvent.keyboard("John");
   await userEvent.click(emailInput);
@@ -24,5 +32,10 @@ it("should call onAddUser when form is submitted", async () => {
   const submitButton = screen.getByRole("button", { name: /submit/i });
   await userEvent.click(submitButton);
 
-  expect(mockOnAddUser).toHaveBeenCalled();
+  //   expect(argsList).toHaveLength(1);
+  //   expect(argsList[0][0]).toEqual({ name: "John", email: "john@gmail.com" });
+  expect(mockOnAddUser).toHaveBeenCalledWith({
+    name: "John",
+    email: "john@gmail.com",
+  });
 });
