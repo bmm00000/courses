@@ -8,6 +8,8 @@ const UserForm = ({ onAddUser }) => {
     event.preventDefault();
 
     onAddUser({ name, email });
+    setName("");
+    setEmail("");
   };
 
   return (
@@ -19,12 +21,14 @@ const UserForm = ({ onAddUser }) => {
           type="text"
           id="name"
           onChange={(e) => setName(e.target.value)}
+          value={name}
         />
         <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <button>Submit</button>
       </form>

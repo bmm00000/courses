@@ -39,3 +39,20 @@ it("should call onAddUser when form is submitted", async () => {
     email: "john@gmail.com",
   });
 });
+
+test("cleans inputs after submit", async () => {
+  render(<UserForm onAddUser={() => {}} />);
+
+  const nameInput = screen.getByRole("textbox", { name: /name/i });
+  const emailInput = screen.getByRole("textbox", { name: /email/i });
+
+  await userEvent.click(nameInput);
+  await userEvent.keyboard("John");
+  await userEvent.click(emailInput);
+  await userEvent.keyboard("john@gmail.com");
+  const submitButton = screen.getByRole("button", { name: /submit/i });
+  await userEvent.click(submitButton);
+
+  expect(nameInput).toHaveValue("");
+  expect(emailInput).toHaveValue("");
+});
