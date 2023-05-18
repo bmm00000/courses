@@ -1,0 +1,5 @@
+Don’t do again section 3, 4, 5, 6. check js file:
+npx rtl-book serve roles-notes.js
+npx rtl-book serve query-notes.js
+npx rtl-book serve criteria-notes.js
+npx rtl-book serve matcher-notes.js
