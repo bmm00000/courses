@@ -1,0 +1,1 @@
+Jest support of ES modules is experimental, you might end up installing extra tools to support ES modules with Jest (so the code gets transpiled behind the scenes). That's why we use Vitest (it's also a bit faster than Jest). 
