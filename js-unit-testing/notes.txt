@@ -1,1 +1,7 @@
 Jest support of ES modules is experimental, you might end up installing extra tools to support ES modules with Jest (so the code gets transpiled behind the scenes). That's why we use Vitest (it's also a bit faster than Jest). 
+
+Vitest supports in-source testing: tests in the same file as the code (Jest does not have it).
+
+with Jest, you can use the 'test' keyword without importing it. with Vitest, you have to import it, or to add a '--globals' flag in the package.json file. in both Jest and Vitest, you can also use 'it', which is equivalent to 'test'.
+
+if you don't use any build tool like webpack, you have to include the suffix when you import files (for example, .js). This is how ES modules work. Vitest acts kind of such a build tool, so you can ommit the suffix in your imports.
