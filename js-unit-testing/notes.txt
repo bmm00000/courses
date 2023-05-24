@@ -5,3 +5,17 @@ Vitest supports in-source testing: tests in the same file as the code (Jest does
 with Jest, you can use the 'test' keyword without importing it. with Vitest, you have to import it, or to add a '--globals' flag in the package.json file. in both Jest and Vitest, you can also use 'it', which is equivalent to 'test'.
 
 if you don't use any build tool like webpack, you have to include the suffix when you import files (for example, .js). This is how ES modules work. Vitest acts kind of such a build tool, so you can ommit the suffix in your imports.
+
+'expect' throws an error if the expectation is not met (and does nothing if expectation is met), and the test runner treats thrown errors as failed tests.
+
+//
+
+An important aspect of testing is to achieve good code coverage. This means, that you want to write tests for the majority of your code (both code files and line of code).
+
+There are tools that help you measure your code coverage - actually Vitest comes with a built-in functionality: https://vitest.dev/guide/features.html#coverage
+
+It is worth noting though, that the goal is not necessarily 100% coverage. There always can be some code that doesn't need any tests (e.g., because it merely calls other functions that are tested already).
+
+In addition, achieving (close to) full code coverage also isn't any guarantee that you wrote good tests. You could cover 100% of your code with meaningless tests after all. Or you could missing important tests (that should test important behaviors). The code would still technically be covered by tests in such scenarios.
+
+So don't see a high amount of code coverage as the ultimate goal!
