@@ -19,3 +19,27 @@ It is worth noting though, that the goal is not necessarily 100% coverage. There
 In addition, achieving (close to) full code coverage also isn't any guarantee that you wrote good tests. You could cover 100% of your code with meaningless tests after all. Or you could missing important tests (that should test important behaviors). The code would still technically be covered by tests in such scenarios.
 
 So don't see a high amount of code coverage as the ultimate goal!
+
+//
+
+Both Jest and Vitest support toBe and toEqual (toEqual does a deep comparison)
+
+In testing, hooks are functions that are executed by the test runner authomatically at certain points in time
+
+You can add testing hooks inside of a suite (inside of a 'describe' block)
+
+//
+
+Concurrency & Default Behavior:
+Even when not adding the .concurrent property / annotation, tests that are stored in different files are executed concurrently (i.e., in parallel). This is done by both Vitest and Jest - ensuring that your tests run in a short amount of time.
+
+With .concurrent you can enforce this behavior also inside the individual files (i.e., tests that live in one and the same file are executed concurrently).
+
+Concurrent execution can reduce the amount of time your tests need to execute. A downside of concurrent execution is, that tests that perform clashing (global) state manipulations may interfere with each other.
+
+You can use the 'concurrent' keyword in 'desdribe', and all the tests in that suite will be executed isn parallel. 
+
+//
+
+Spies: wrappers around functions or empty replacements of functions that allow you to track if and how a function was called.
+Mocks: a replacement for an API that may provide some test-specific behaviour.
