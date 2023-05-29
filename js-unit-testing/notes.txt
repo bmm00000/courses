@@ -43,3 +43,12 @@ You can use the 'concurrent' keyword in 'desdribe', and all the tests in that su
 
 Spies: wrappers around functions or empty replacements of functions that allow you to track if and how a function was called.
 Mocks: a replacement for an API that may provide some test-specific behaviour.
+
+//
+
+for both jest and vitest, the default testing environment is node.js. therefore, you have access to all node.js apis and modules inside of your testing code and the code executed by your testing code. however, you can't interact with the browser or browser specific apis.
+mocking the document object methods and browser apis is not practical. that's why both jest and vitest support another environment: jsdom (a virtual dom environment that is created by the test runner behind the scenes, so it emulates that the code runs in a browser)
+vitest also provides another environment: happy-dom.
+
+
+https://github.com/academind/js-testing-practical-guide-code/
