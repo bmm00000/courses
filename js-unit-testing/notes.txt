@@ -50,5 +50,15 @@ for both jest and vitest, the default testing environment is node.js. therefore,
 mocking the document object methods and browser apis is not practical. that's why both jest and vitest support another environment: jsdom (a virtual dom environment that is created by the test runner behind the scenes, so it emulates that the code runs in a browser)
 vitest also provides another environment: happy-dom.
 
+//
+
+Mocking Frontend Libraries
+In this example project, the global fetch() API / function is used.
+
+You can, of course, also use third-party libraries in frontend JavaScript projects though. For example, the axios library is a very popular library for sending HTTP requests from the frontend.
+
+In case you're working with such a library, instead of a global value, you can mock that library as you learned in the previous section (i.e., use vi.mock('axios'), provide a __mocks__/axios.js file if necessary etc.).
+
+//
 
 https://github.com/academind/js-testing-practical-guide-code/
