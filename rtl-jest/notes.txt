@@ -1,0 +1,52 @@
+https://testing-library.com/docs/dom-testing-library/api-async
+
+@testing-library/react: uses ReactDOM to render components for testing
+@testing-library/user-event: simulates user inputs, like clicking, typing...
+@testing-library/dom: helps to find elements that are rendered by our components (this library is included authomatically in our project by @testing-library/react)
+jest: test runner (runs tests, reports results) and assertion library (it finds all files that end in .test.js, .spec.js, or are included in a folder called __test__)
+jsdom: simulates a browser when running on a Node environment
+
+aria roles clarify the purpose of an html element. they are traditionally used by screen readers (software to help people understand the content of the screen).
+many html elements have an implicit or authomatically assigned role. html elements can also be assigned a role manually.
+https://www.w3.org/TR/html-aria/#docconformance
+
+we have matchers from jest and also from jest-dom:
+https://jestjs.io/docs/expect
+https://jestjs.io/docs/using-matchers
+https://github.com/testing-library/jest-dom
+
+//
+
+Test was not wrapped in act(...) Warning and Test Failure:
+
+In the upcoming lecture, we will be testing simulated user events. When executing the tests you will see this message in your terminal:
+
+"Warning: An update to UserForm inside a test was not wrapped in act(...)"
+
+React Testing Library (RTL) just saw a major v14 update a few weeks ago. Create React App (CRA) has not updated its versions of RTL, so, there are currently some major conflicts with the dependencies that are being installed.
+
+Most importantly, user events are now async:
+
+https://testing-library.com/docs/user-event/intro/#writing-tests-with-userevent
+
+To resolve the testing errors in this project and anywhere else in the course that shows user events like user.click, user.keyboard, etc, you'll need to make the test function async:
+
+test("it calls onUserAdd when the form is submitted", async () => {
+
+Then, add the await keyword wherever there is a user action:
+
+await user.click(nameInput);
+
+The act warnings appear to be a bug that was introduced in a v13 RTL update and then fixed with v14. You may choose to ignore the warnings as they should not affect your tests. If you wish to resolve them, you can uninstall the current version of RTL that CRA installed and re-install with the latest versions:
+
+npm uninstall @testing-library/jest-dom @testing-library/react @testing-library/user-event
+
+npm install @testing-library/jest-dom @testing-library/react @testing-library/user-event
+
+//
+
+Don’t do again section 3, 4, 5, 6. check js files:
+npx rtl-book serve roles-notes.js
+npx rtl-book serve query-notes.js
+npx rtl-book serve criteria-notes.js
+npx rtl-book serve matcher-notes.js

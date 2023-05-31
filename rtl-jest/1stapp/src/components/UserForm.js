@@ -4,7 +4,7 @@ const UserForm = ({ onAddUser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleAddUser = (event) => {
+  const handleSubmitForm = (event) => {
     event.preventDefault();
 
     onAddUser({ name, email });
@@ -15,7 +15,7 @@ const UserForm = ({ onAddUser }) => {
   return (
     <>
       <h1>Users form</h1>
-      <form onSubmit={handleAddUser}>
+      <form onSubmit={handleSubmitForm}>
         <label htmlFor="name">Name:</label>
         <input
           type="text"

@@ -13,6 +13,7 @@ test("should display two inputs and one button", () => {
 });
 
 it("should call onAddUser when form is submitted", async () => {
+  // this is a spy, not a mock!!
   const mockOnAddUser = jest.fn();
 
   //   const argsList = [];
@@ -56,3 +57,5 @@ test("cleans inputs after submit", async () => {
   expect(nameInput).toHaveValue("");
   expect(emailInput).toHaveValue("");
 });
+
+// we can also simulate pressing enter: userEvent.keyboard('{Enter}')
