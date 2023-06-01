@@ -10,14 +10,19 @@ const renderComponent = () => {
 
   return { users };
 };
+// react testing library gives the recommendation of not render your components inside of a beforeEach function.
 
 test("renders one row per user", async () => {
   renderComponent();
+
+  // when react testing library takes the component and renders it, the 'container' is the div that is rendered wrapping our whole component. This is an html element that has all the properties/methods that html elements have, for example, querySelector, etc.:
   //   const { container } = render(
   //     <UserList users={[{ name: "John", email: "john@gmail.com" }]} />
   //   );
 
+  // to get help finding a particular element, use this helper function:
   //   screen.logTestingPlaygroundURL();
+  // if it's difficult to select any html element in the testing playground, add some in-line styles to make it distinct, for example: style="border: 10px solid red; display: block"
 
   //   const rows = container.querySelectorAll("tbody tr");
   const rows = within(screen.getByTestId("users")).getAllByRole("row");
