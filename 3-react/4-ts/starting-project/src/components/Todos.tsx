@@ -3,12 +3,22 @@ import TodoItem from "./TodoItem";
 
 import classes from "./Todos.module.css";
 
-const Todos: React.FC<{ items: Todo[] }> = ({ items }) => {
+const Todos: React.FC<{ items: Todo[]; onItemClick: (id: string) => void }> = ({
+  items,
+  onItemClick,
+}) => {
   return (
     <>
       <ul className={classes.todos}>
         {items.map((item) => (
-          <TodoItem key={item.id} text={item.text} />
+          <TodoItem
+            key={item.id}
+            text={item.text}
+            id={item.id}
+            onClick={onItemClick}
+            // if you don't want to pass down the id, you can bind onClick, as follows:
+            // onClick={onItemClick.bind(null, item.id)}
+          />
         ))}
       </ul>
     </>

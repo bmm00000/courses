@@ -12,11 +12,16 @@ function App() {
     setTodoItems((existingItems) => existingItems.concat(newItem));
   };
 
+  const handleDeleteTodo = (id: string) => {
+    const newTodoItems = todoItems.filter((item) => item.id !== id);
+    setTodoItems(newTodoItems);
+  };
+
   return (
     <>
       <h1>Todo list</h1>
       <NewTodo onAddTodo={handleAddTodo} />
-      <Todos items={todoItems} />
+      <Todos items={todoItems} onItemClick={handleDeleteTodo} />
     </>
   );
 }
