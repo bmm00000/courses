@@ -1,1 +1,0 @@
-ts does static checking: detects errors without running code.
