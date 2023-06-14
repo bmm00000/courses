@@ -55,3 +55,6 @@ const person1: Person = {
 // tsc --init, to generate tsconfig.json file.
 // tsc [name of file]?, compile one file, or the whole directory.
 // tsc -w [name of file]?, watch mode for one file, or for the whole directory.
+
+// in tsconfig.json, if 'lib' is commented out, a default set of type declarations are included (eg. things found in browser environments like 'document', etc.). you can see these type declarations double-clicking and selecting 'type definition', or in the github repo of typescript.
+// if we un-comment 'lib' and leave the array empty, then this default set of type declarations is not included, and we have to add our own.

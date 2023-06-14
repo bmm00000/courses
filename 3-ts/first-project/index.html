@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="dist/index.js" defer></script>
+    <!-- you have to use 'defer' in the script, or to add the script at the end of the body. otherwise, the script will be executed before the html has been rendered and won't find elementsById, etc. -->
+  </head>
+  <body>
+    <form>
+      <input type="text" id="input" />
+      <button id="btn">Click</button>
+    </form>
+    <ul></ul>
+  </body>
+</html>
