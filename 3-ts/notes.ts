@@ -51,3 +51,7 @@ const person1: Person = {
     return `I'm ${this.name}, ${someGreeting}`;
   },
 };
+
+// tsc --init, to generate tsconfig.json file.
+// tsc [name of file]?, compile one file, or the whole directory.
+// tsc -w [name of file]?, watch mode for one file, or for the whole directory.
