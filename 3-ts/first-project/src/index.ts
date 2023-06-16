@@ -23,16 +23,36 @@ const ul = document.querySelector("ul")!;
 //   //   (<HTMLInputElement>input).value = ''
 // });
 
-const handleSubmit = (event: SubmitEvent) => {
-  event.preventDefault();
+interface Todo {
+  text: string;
+  completed: boolean;
+}
 
-  const inputValue = input.value;
+const todos: Todo[] = readTodos();
+todos.forEach(createTodo);
+
+function readTodos(): Todo[] {
+  const todosJSON = localStorage.getItem("todos");
+  if (todosJSON === null) return [];
+  return JSON.parse(todosJSON);
+}
+
+function createTodo(todo: Todo): void {
   const listItem = document.createElement("li");
   const newInput = document.createElement("input");
   newInput.type = "checkbox";
-  listItem.textContent = inputValue;
+  newInput.checked = todo.completed;
+  listItem.textContent = todo.text;
   listItem.append(newInput);
   ul.append(listItem);
+}
+
+const handleSubmit = (event: SubmitEvent) => {
+  event.preventDefault();
+  const newTodo: Todo = { text: input.value, completed: false };
+  todos.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  createTodo(newTodo);
   input.value = "";
 };
 
