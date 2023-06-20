@@ -27,6 +27,7 @@ function identity<T>(item: T): T {
 
 identity<number>(7);
 identity<string>("hello");
+// the former is the same as the syntax Array<string> that we saw before in other projects.
 
 function getRandomElement<T>(list: T[]): T {
   const randIdx = Math.floor(Math.random() * list.length);
@@ -35,9 +36,13 @@ function getRandomElement<T>(list: T[]): T {
 
 console.log(getRandomElement<string>(["a", "b", "c"]));
 getRandomElement<number>([5, 6, 21, 354, 567, 234, 654]);
+// but you don't even need to specify <number> like above, since TS infers it, as follows:
 getRandomElement([1, 2, 3, 4]);
 
+// if we are using TSX in react, TS gets a bit confused WHEN USING ARROW FUNCTIONS with generics. that's why you need to add a comma to the type, like this: <T,>
+
 // Generics With Constraints:
+// if you hover over 'merge', you will see that TS infers the return type. Ditto with 'comboObj'.
 function merge<T extends object, U extends object>(object1: T, object2: U) {
   return {
     ...object1,
@@ -52,6 +57,8 @@ merge<{ name: string }, { pets: string[] }>(
   { pets: ["blue", "elton"] }
 );
 
+//
+
 interface Lengthy {
   length: number;
 }
@@ -65,8 +72,10 @@ function printDoubleLength<T extends Lengthy>(thing: T): number {
 // }
 
 printDoubleLength("asdasd");
+// a string has a length, that's why TS does not complain!
 printDoubleLength(234); //Not allowed!
 
+// DEFAULT TYPE PARAMETERS:
 function makeEmptyArray<T = number>(): T[] {
   return [];
 }
