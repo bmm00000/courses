@@ -1,0 +1,6 @@
+you can install types for react from the DefinitelyTyped repo. but we usually integrate ts through create react app (see documentation).
+since we use react react app with ts, we don't need to use the 'tsc' command anymore. when we 'npm start', webpack does all the compilation, etc.
+
+there's no official documentation to write React with TS, but this is a good reference:
+https://react-typescript-cheatsheet.netlify.app/
+https://github.com/typescript-cheatsheets/react
