@@ -58,3 +58,8 @@ const person1: Person = {
 
 // in tsconfig.json, if 'lib' is commented out, a default set of type declarations are included (eg. things found in browser environments like 'document', etc.). you can see these type declarations double-clicking and selecting 'type definition', or in the github repo of typescript.
 // if we un-comment 'lib' and leave the array empty, then this default set of type declarations is not included, and we have to add our own.
+
+// in some repos (for example in DefinitelyTyped), you will see that imports and exports are managed through Namespaces (this is a TS way of importing and exporting files). However, TS is moving away from that, and towards ESModules.
+// https://www.typescriptlang.org/docs/handbook/2/modules.html#non-modules
+
+// watch again 118-121
