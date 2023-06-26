@@ -1,0 +1,48 @@
+check colt's webpack course in youtube.
+
+in order to use webpack, we need to install it, along with quite a few packages:
+npm install --save-dev webpack webpack-cli typescript ts-loader
+to use webpack from cli or to call it from the package.json file, we need webpack-cli. 
+we install typescript, because it's a good pratice to have its version in package.json.
+ts-loader is an intermediary between ts and webpack (webpack doesn't care about ts). we have other loaders for webpack: https://webpack.js.org/loaders/
+
+https://webpack.js.org/guides/typescript/
+in webpack.config.js, the rules tell webpack what to do if it encounters files of different kinds, be it ts, sass, or anything else. in our case, the regular expression applies to files ended in ts or tsx.
+
+in package.json, you have to add the script 'build': 'webpack'
+
+when you build, you put all the code from all your modules and all external dependencies, minified, in one js file
+
+after you build, you can delete all other files in the 'dist' folder from previous compilations to ts. you only need the bundle.js file there.
+in the browser, you can see bundle.js in the 'sources' tab.
+
+how to debug and make sense of the bundled code? source maps will take bundle.js and turn it into its pre-bundled state. to do that, you need to set in the tsconfig.json file the following: "sourceMap": true /* Create source map files for emitted JavaScript files. */. Also, in webpack.config.js, you need to add the following line: devtool: "inline-source-map". see https://webpack.js.org/guides/typescript/
+after you build with source maps, in the 'sources' tab of the browser, you will see 'webpack_ts', where you will be able to see the original code, so you can debug with breakpoints, etc.
+
+you can add 'mode: development' or 'mode: production' in webpack.config.js
+development mode will not minify the bundle, whereas production mode will minify it.
+
+the 'webpack dev server' third-party library will serve the app and handle the building behind the scenes in memory (instead of making a different file every single time in disk), while in development
+npm install --save-dev webpack-dev-server
+https://www.npmjs.com/package/webpack-dev-server?activeTab=readme
+as you can see in the documentation above, after you install it, you have to  add the following script in package.json:
+{
+  "scripts": {
+    "serve": "webpack serve"
+  }
+}
+you also need to add the following 'output':
+publicPath: "/dist",
+and also add the following:
+ devServer: {
+        static: {
+            directory: path.join(__dirname, "./")
+        },
+    },
+and then run:
+npm run serve
+(note that you will not see the bundle.js file in 'dist', since the bundling is done in memory)
+
+when you want to generate the minified bundle, you change the mode to production. how to have both development and production?
+you generate a new file (in our example, 'webpack.prod.js'), and then add '--config webpack.prod.js' to the 'bulid' script. Before adding this production config, you had only 'webpack' in the build script, but now you have 'webpack --config webpack.prod.js' in the build script.
+as you can see, by default wepack will point to webpack.config.js, but you can point it anywhere else using the --config option.
