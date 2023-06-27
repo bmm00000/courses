@@ -63,3 +63,5 @@ const person1: Person = {
 // https://www.typescriptlang.org/docs/handbook/2/modules.html#non-modules
 
 // watch again 118-121
+// read again webpack, see if I get it all!
+// ask money back
