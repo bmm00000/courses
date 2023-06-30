@@ -12,4 +12,10 @@ function Posts() {
   );
 }
 
+export async function loader() {
+  const response = await fetch("http://localhost:8080/posts");
+  const parsedResponse = await response.json();
+  return parsedResponse.posts;
+}
+
 export default Posts;
