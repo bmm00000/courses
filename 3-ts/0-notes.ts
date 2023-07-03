@@ -63,7 +63,3 @@ const person1: Person = {
 // https://www.typescriptlang.org/docs/handbook/2/modules.html#non-modules
 // if you don't import/export in js, you will see that variables, functions, objects, etc. that you define in one file, can be recognized in other files, because it's all considered in the global scope. But as soon as you add the keyword 'export', that won't happen anymore, since it will be considered a modul and not a script. That's point of modules: you different 'name spaces' for your code, so it doesn't clash with the code of other files.
 // commonJS and ESmodules work with node, but not in the browser (well, to be precise, ESmodules work in modern browers, but you have to use the type='module' attribute in the script tag). That's why you have different options when using several files: 1) add the scripts in the right orer in the html file, 2) specify 'module' to 'ES6' in tsconfig.json and then use the type="module" attribute in the script tag of the html file (in this case, you have to use a local server to open the html file, because only with the file protocol does not work).
-
-// watch again 118-121
-// read again webpack, see if I get it all!
-// ask money back

@@ -1,10 +1,12 @@
 check colt's webpack course in youtube.
 
+the problem that is solved by webpack is that is more comfortable for developers to use different modules, but in runtime, multiple modules require multipole http requests, which will lead to bottlenecks. With webpack, we can use modules while developing, and then put everything together in one bundle, minified and optimized.
+
 in order to use webpack, we need to install it, along with quite a few packages:
 npm install --save-dev webpack webpack-cli typescript ts-loader
 to use webpack from cli or to call it from the package.json file, we need webpack-cli. 
 we install typescript, because it's a good pratice to have its version in package.json.
-ts-loader is an intermediary between ts and webpack (webpack doesn't care about ts). we have other loaders for webpack: https://webpack.js.org/loaders/
+ts-loader is an intermediary between ts and webpack (webpack doesn't care about ts). what ts-loader does is to compile ts into js, and then bundle. we have other loaders for webpack: https://webpack.js.org/loaders/
 
 https://webpack.js.org/guides/typescript/
 in webpack.config.js, the rules tell webpack what to do if it encounters files of different kinds, be it ts, sass, or anything else. in our case, the regular expression applies to files ended in ts or tsx.
@@ -45,4 +47,4 @@ npm run serve
 
 when you want to generate the minified bundle, you change the mode to production. how to have both development and production?
 you generate a new file (in our example, 'webpack.prod.js'), and then add '--config webpack.prod.js' to the 'bulid' script. Before adding this production config, you had only 'webpack' in the build script, but now you have 'webpack --config webpack.prod.js' in the build script.
-as you can see, by default wepack will point to webpack.config.js, but you can point it anywhere else using the --config option.
+as you can see, by default webpack will point to webpack.config.js, but you can point it anywhere else using the --config option.
