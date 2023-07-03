@@ -1,0 +1,2 @@
+some time ago, namespaces were used to share code between files in ts, but modern ESmodules include all their features, and ts website recommends you to move to ESmodules.
+you can find namespaces sometimes in DefinitelyTyped.
