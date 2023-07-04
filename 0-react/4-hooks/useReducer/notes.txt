@@ -1,0 +1,12 @@
+we use useReducer when we have several states that belong together (eg. enteredEmail, and emailIsValid), or when one state update depends on another state (eg. setFormIsValid depends on emailIsValid. Also isEmailValid depends on enteredEmail). In these cases, we cannot use the function syntax to update state that depends on a former state (since we are talking about different states). Therefore, we may end up updating a state with a not-updated state. You could manage this by including both enteredEmail and isEmailValid in an object in a single state. However, if this becomes more complex, it would be more and more difficult to manage. That's why we use useReducer.
+
+const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn)
+dispatchFn => a function that can be used to dispatch a new action (ie. trigger an update of the state). The dispatched action will be consumed as an argument of the reducerFn.
+reducerFn => a function that is triggered automatically once an action is dispatched (via dispatchFn). it receives the latest state snapshot and should return the new updated state.
+initFn => function to set the initial state programmatically (eg. for example, the initial state is the result of an http request).
+
+in our example, we are going to use useReducer to combine our two states that belong together (enteredEmail and emailIsValid, and ditto with password)
+note that we are declaring the reducer functions outside of the component, since we don't need anything in these functions that will be generated inside the component, and react will pass anything needed in the reducer functions automatically.
+
+you will use useReducer when useState becomes cumbersome, gives you a lot of bugs or unintended behaviours.
+in a nutshell, with useReducer, you will be able to deal with more complex state updating logic, where you are always guaranteed that you will have the latest state snapshots. Also, you can move all that complex logic outside of the component.
