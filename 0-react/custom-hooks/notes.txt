@@ -1,0 +1,4 @@
+we use custom hooks to reuse stateful logic (put the stateful logic inside of functions.). we cannot do that inside components, because that goes against the rules of hooks in react.
+you have to start the name of your hooks with 'use', since this  will tell react that 
+you will use it following the rules of hooks: use it only inside a component, at the top level, not inside other functions or inside if statements, etc.
+the state that you initialize when using a custom hook will be tied to the component where you used it (you don't share state or effects acros components. each one has its own).

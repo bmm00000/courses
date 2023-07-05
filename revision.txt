@@ -10,10 +10,8 @@ https://github.com/academind/react-complete-guide-code
 
 2- ANOTHER DAY (check anki?): re-build, and then compare with my old code, and also check slides in repos above.
 
-React Max:
-re-watch from 530-adding routes.
 
 
-colt typescript course
+
 bonny testing course
 mosh react courses
