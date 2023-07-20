@@ -1,0 +1,27 @@
+echo $SHELL 
+($ is for environment variables)
+
+cd new-directory; mkdir www; pwd
+(to run multiple commands, use ;)
+
+mkdir -p /asia/india/bangalore
+
+rm -r /asia
+
+cp -r /asia/india /asia/china
+
+cat > file.txt
+(now you can write in the file)
+
+cat file.txt
+(now you can read the content of the file)
+
+cp file.txt /asia/india/new-file.txt
+
+mv file.txt /asia/india/new-file.txt
+(to move a file)
+
+mv file.txt new-name.txt
+(to rename a file)
+
+rm new-name.txt
