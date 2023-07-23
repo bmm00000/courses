@@ -184,3 +184,5 @@ You can list the changed files as well using the --name-only option with the git
 (to get help on a specific command):
 git help [command]
 git log --graph --decorate to see previous commit history along with the branch they were committed on.
+
+DO NOT WATCH GIT SECTIONS AGAIN!
