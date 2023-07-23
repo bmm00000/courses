@@ -1,3 +1,5 @@
+watch again video of all devops tools fiting together
+
 echo $SHELL 
 ($ is for environment variables)
 
@@ -16,7 +18,14 @@ cat > file.txt
 cat file.txt
 (now you can read the content of the file)
 
+(to write in a file):
+echo 'hello there' >> file.txt
+
 cp file.txt /asia/india/new-file.txt
+(copy and rename)
+
+cp file.txt /asia/india
+(copy and keep the same name)
 
 mv file.txt /asia/india/new-file.txt
 (to move a file)
@@ -25,3 +34,153 @@ mv file.txt new-name.txt
 (to rename a file)
 
 rm new-name.txt
+
+//
+
+vi index.html
+(you are in command mode, where you can do anything (copy, paste, delete lines, etc.) but not write code).
+
+if you press 'i', then you are in insert mode, then you can modify contents.
+press 'esc' to go back from insert mode to command mode.
+
+command mode:
+move around with the arrows of your keyboard
+delete letter with 'x', delete line with 'dd'
+copy with 'yy' and paste with 'p'
+scroll up and down: CRTL+u, CTRL+d
+
+to be able to type commands, you press ':', as follows:
+to save: ':w', or ':w filename'
+to quit, without saving: ':q'
+to quit, saving: ':wq'
+to find the word 'of' in the file: '/of', then all the instances of the word will be hightlighted, and then press 'n' to move to the next instance of the word
+
+current user: 'whoami'
+current user id: 'id'
+switch user: 'su anotherusername' (it will prompt you to enter the password)
+to access another system remotely with another username using ssh, you enter username and the host name: 'ssh anotherusername@192.333.2.2'
+
+//
+
+regular users cannot access the '/root' directory and perform certain operations (delete files, install software, etc.), only root users can do that.
+root users can give sudo priviledges to regular users, by including them in the '/etc/sudoers' directory, so they will be able to perform these operations by adding the 'sudo' prefix to the commands.
+
+//
+
+curl http://www.some-file.com/some-file.txt -O
+(to download files from the internet, you add '-O' to save file, otherwise it will print it on the screen)
+(another command to do the same):
+wget http://www.some-file.com/some-file.txt -O some-file.txt
+
+ls /etc/*release*
+cat /etc/*release*
+(to check the OS of your linux system, you can inspect the release files. they have different names, that's why you use the wildcard *. when you print them, you will see the name of the OS anywhere)
+
+//
+
+centOS uses RPM (Red Hat Package Manager)
+other operative systems like Red Hat Enterprise Linux or Fedora do the same.
+
+rpm -i telnet.rpm
+(to install a package)
+rpm -e telnet.rpm
+(to uninstall a package)
+rpm -q telnet.rpm
+(to query a package)
+
+but the former commands will not install dependencies, such as programming languages needed to run these packages.
+that's why we use package managers like YUM (high level package manager that uses RPM underneath), for example:
+yum install ansible
+(this will install not only ansible but also all its dependencies in the right order. to do that, yum searches many remote repos that act as software warehouses)
+
+in '/etc/yum.repos.d', you have the info about the remote repositories that contain the software that you may need to install. it might happen that the software or version that you need is not in that file, so you may need to update it.
+yum repolist
+(to see the repos available)
+ls /etc/yum.repos.d/
+(to see the files where the repos are configured)
+(if you go inside of any of these files, you will see the url where the package is hosted):
+cat /etc/yum.repos.d/CentOS-Base.repolist
+(to see info about installed packages, or to check whether or not a package is installed):
+yum list [package-name]
+(to remove an installed package):
+yum remove [package-name]
+(to list all available versions of a package):
+yum --showduplicates list [package-name]
+(to install a version of a package):
+yum install ansible-2.4.2.1
+
+//
+
+when you install a software that must continue running even when the system is rebooted, or when re-started, needs to do start depending softwares in the right order, eg. a web server, a database server, or devops tools such as docker, etc., they are authomatically configured as services on the system.
+(to start a service, for example, the Httpd service (an apache web server)):
+service httpd start
+(but the former command uses underneath the following one, for the same purposes):
+systemctl start httpd
+systemctl stop httpd
+systemctl status httpd
+systemctl enable httpd (to start a service upon reboot of the system)
+systemctl disable httpd (not to start a service upon reboot of the system)
+
+how do you configure your program as a service (so you can run the above commands when you need to, without worrying about paths, arguments, etc.)?
+we must configure our program as a system d service, by creating a system d unit file. these files are located at /etc/systemd/system
+therefore, you create a file with the name that you want the service to be known as, with an extension '.service'.
+Therefore, we create the file 'my_app.service', and inside the file, we write a service section with an ExecStart directive with the command to start the app, as follows:
+[Service]
+ExecStart=/usr/bin/python3 /opt/code/my_app.py
+(then we let the system know that we have a new service):
+systemctl daemon-reload
+(now we can start our app):
+systemctl start my_app
+(we can check in the status that our app is active):
+systemctl status my_app
+(we can visit our app):
+curl http://localhost:5000
+(and we can stop our app):
+systemctl stop my_app
+
+how to configure the service to run automatically upon system bootup?
+in the unit configuration file (aka service configuration file, or Service Unit File), we add an Install section, as follows:
+[Install]
+WantedBy=multi-user.target
+(and then):
+systemctl enable my_app
+
+(to add metadata to our service):
+[Unit]  
+Description=My python web application
+
+(to execute dependent scripts before or after our app runs):
+[Service]
+ExecStart=/usr/bin/python3 /opt/code/my_app.py
+ExecStartPre:/opt/code/configure_db.sh
+ExecStartPost:/opt/code/email_status.sh
+
+
+(to re-start the app automatically if system crashes):
+[Service]
+ExecStart=/usr/bin/python3 /opt/code/my_app.py
+ExecStartPre:/opt/code/configure_db.sh
+ExecStartPost:/opt/code/email_status.sh
+Restart:always
+
+//
+
+watch again networking section:
+ip link
+ip addr add [network-address] dev [interface]
+route
+ip route add [destination network] via [door]
+ip route add default via [door]
+
+watch again introduction to programming languages
+
+//
+
+(to remove a file from staging area):
+git rm notes.txt
+(to make git ignore a file permanently, so it will not be listed at all):
+echo "notes.txt" >> .gitignore
+You can list the changed files as well using the --name-only option with the git log command
+(to get help on a specific command):
+git help [command]
+git log --graph --decorate to see previous commit history along with the branch they were committed on.
