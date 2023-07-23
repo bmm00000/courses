@@ -185,4 +185,6 @@ You can list the changed files as well using the --name-only option with the git
 git help [command]
 git log --graph --decorate to see previous commit history along with the branch they were committed on.
 
-DO NOT WATCH GIT SECTIONS AGAIN!
+do not watch again. only revise notes, and do the labs of some section
+do not do the labs again of git section
+decide what videos to watch again.
