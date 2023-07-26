@@ -239,3 +239,7 @@ docker attach [container id]
 
 docker build -t [name you want to give to the image] .
 docker push [image name]
+
+//
+
+docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d kodekloud/simple-webapp
