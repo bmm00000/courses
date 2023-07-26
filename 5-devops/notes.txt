@@ -190,3 +190,52 @@ do not do the labs again of git section
 decide what videos to watch again.
 
 do not repeat jenkins section !! not even the labs!
+
+//
+//
+
+docker run nginx
+(lists all running containers):
+docker ps 
+(lists all running containers, running now or in the past):
+docker ps -a
+docker stop [name]
+(to remove exited container from the list):
+docker rm [name]
+(to see list of images present in our host):
+docker images
+(to remove an image that you don't plan to use anymore (remember, you have to delete all dependent containers from that image)):
+docker rmi nginx
+(to download an image, but not run the container):
+docker pull nginx
+
+docker run ubuntu sleep 5
+(to execute a command on a running container)"
+docker exec [container id] [command]
+
+(to run in detached mode, so you can use console for other things):
+docker run -d [image]
+(of you want to attach back to the container, so you can see it running in the console):
+docker attach [name or id of the container]
+
+//
+
+(to specify version):
+docker run redis:4.6.3
+(to run on interactive mode, without terminal):
+docker run -i [image name] 
+(ditto, with a pseudo terminal):
+docker un -it [image name]
+(to map ports):
+docker run -p 80:5000 my-app
+(to map directories to persist data after you delete the docker container):
+docker run -v /host/directory:/var/lib/mysql mysql
+(to check specific details of a container):
+docker inspect [container name]
+docker logs [container name]
+docker attach [container id]
+
+//
+
+docker build Dockerfile -t [name you give to the image]
+docker push [image name]
