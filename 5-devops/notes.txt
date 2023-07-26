@@ -237,5 +237,5 @@ docker attach [container id]
 
 //
 
-docker build Dockerfile -t [name you give to the image]
+docker build -t [name you want to give to the image] .
 docker push [image name]
