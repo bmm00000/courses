@@ -1,4 +1,5 @@
 watch again video of all devops tools fiting together
+watch again all marked videos.
 
 echo $SHELL 
 ($ is for environment variables)
@@ -21,6 +22,9 @@ cat file.txt
 (to write in a file):
 echo 'hello there' >> file.txt
 
+cp file.txt /asia/india
+(copy a file to a directory, keepeing the same name)
+
 cp file.txt /asia/india/new-file.txt
 (copy and rename)
 
@@ -28,10 +32,10 @@ cp file.txt /asia/india
 (copy and keep the same name)
 
 mv file.txt /asia/india/new-file.txt
-(to move a file)
+(to move a file, like cut and paste)
 
 mv file.txt new-name.txt
-(to rename a file)
+(to rename a file, in reality, it's moving to the same path)
 
 rm new-name.txt
 
@@ -62,7 +66,7 @@ to access another system remotely with another username using ssh, you enter use
 
 //
 
-regular users cannot access the '/root' directory and perform certain operations (delete files, install software, etc.), only root users can do that.
+regular users cannot access the '/root' directory and perform certain operations (delete files, install software, services, etc.), only root users can do that.
 root users can give sudo priviledges to regular users, by including them in the '/etc/sudoers' directory, so they will be able to perform these operations by adding the 'sudo' prefix to the commands.
 
 //
@@ -78,7 +82,7 @@ cat /etc/*release*
 
 //
 
-centOS uses RPM (Red Hat Package Manager)
+centOS uses RPM (Red Hat Package Manager) (the same as RH Enterprise Linux or Fedora).
 other operative systems like Red Hat Enterprise Linux or Fedora do the same.
 
 rpm -i telnet.rpm
@@ -91,17 +95,18 @@ rpm -q telnet.rpm
 but the former commands will not install dependencies, such as programming languages needed to run these packages.
 that's why we use package managers like YUM (high level package manager that uses RPM underneath), for example:
 yum install ansible
-(this will install not only ansible but also all its dependencies in the right order. to do that, yum searches many remote repos that act as software warehouses)
+(this will install not only ansible but also all its dependencies in the right order. to do that, yum searches many remote repos that act as software warehouses. these can be in your local, in private servers, or in the internet)
 
-in '/etc/yum.repos.d', you have the info about the remote repositories that contain the software that you may need to install. it might happen that the software or version that you need is not in that file, so you may need to update it.
+in '/etc/yum.repos.d', you have the info about the remote repositories that contain the software that you may need to install (all operating systems come with this file about repos). it might happen that the software or version that you need is not in the repos of that file, so you may need to update it with new repos.
 yum repolist
 (to see the repos available)
 ls /etc/yum.repos.d/
 (to see the files where the repos are configured)
-(if you go inside of any of these files, you will see the url where the package is hosted):
+(if you go inside of any of these files, you will see the url of the repo where the package is hosted):
 cat /etc/yum.repos.d/CentOS-Base.repolist
 (to see info about installed packages, or to check whether or not a package is installed):
 yum list [package-name]
+(just 'yum list' will display all packages, which is a lot!)
 (to remove an installed package):
 yum remove [package-name]
 (to list all available versions of a package):
@@ -111,6 +116,7 @@ yum install ansible-2.4.2.1
 
 //
 
+In linux, a service (or daemon) is a script that runs in the background. It listens continuously for incoming requests and sends a response based on the given request. A service is different from a process as a process is an application or a script that can be running in the foreground or the background.
 when you install a software that must continue running even when the system is rebooted, or when re-started, needs to do start depending softwares in the right order, eg. a web server, a database server, or devops tools such as docker, etc., they are authomatically configured as services on the system.
 (to start a service, for example, the Httpd service (an apache web server)):
 service httpd start
@@ -122,7 +128,7 @@ systemctl enable httpd (to start a service upon reboot of the system)
 systemctl disable httpd (not to start a service upon reboot of the system)
 
 how do you configure your program as a service (so you can run the above commands when you need to, without worrying about paths, arguments, etc.)?
-we must configure our program as a system d service, by creating a system d unit file. these files are located at /etc/systemd/system
+the systemctl command line utility is used to manage the system d services. therefore, we must configure our program as a system d service, by creating a system d unit file. these files are located at /etc/systemd/system. you can read this file by: systemctl cat [appname].service
 therefore, you create a file with the name that you want the service to be known as, with an extension '.service'.
 Therefore, we create the file 'my_app.service', and inside the file, we write a service section with an ExecStart directive with the command to start the app, as follows:
 [Service]
@@ -140,6 +146,7 @@ systemctl stop my_app
 
 how to configure the service to run automatically upon system bootup?
 in the unit configuration file (aka service configuration file, or Service Unit File), we add an Install section, as follows:
+(in this section, we configure our service to run right after a service (multi-user.target) that runs at bootup):
 [Install]
 WantedBy=multi-user.target
 (and then):
@@ -155,24 +162,12 @@ ExecStart=/usr/bin/python3 /opt/code/my_app.py
 ExecStartPre:/opt/code/configure_db.sh
 ExecStartPost:/opt/code/email_status.sh
 
-
 (to re-start the app automatically if system crashes):
 [Service]
 ExecStart=/usr/bin/python3 /opt/code/my_app.py
 ExecStartPre:/opt/code/configure_db.sh
 ExecStartPost:/opt/code/email_status.sh
 Restart:always
-
-//
-
-watch again networking section:
-ip link
-ip addr add [network-address] dev [interface]
-route
-ip route add [destination network] via [door]
-ip route add default via [door]
-
-watch again introduction to programming languages
 
 //
 
@@ -185,61 +180,53 @@ You can list the changed files as well using the --name-only option with the git
 git help [command]
 git log --graph --decorate to see previous commit history along with the branch they were committed on.
 
-do not watch again. only revise notes, and do the labs of some section
-do not do the labs again of git section
-decide what videos to watch again.
-
-do not repeat jenkins section !! not even the labs!
-
-//
 //
 
-docker run nginx
-(lists all running containers):
-docker ps 
-(lists all running containers, running now or in the past):
-docker ps -a
-docker stop [name]
-(to remove exited container from the list):
-docker rm [name]
-(to see list of images present in our host):
-docker images
-(to remove an image that you don't plan to use anymore (remember, you have to delete all dependent containers from that image)):
-docker rmi nginx
-(to download an image, but not run the container):
-docker pull nginx
+YAML:
 
-docker run ubuntu sleep 5
-(to execute a command on a running container)"
-docker exec [container id] [command]
+variables:
+Fruit: banana
 
-(to run in detached mode, so you can use console for other things):
-docker run -d [image]
-(of you want to attach back to the container, so you can see it running in the console):
-docker attach [name or id of the container]
+arrays/lists:
+Fruits: 
+    - banana
+    - apple
+
+objects/dictionaries:
+Banana: 
+    calories: 105
+    fat: 11
+
+# any line that start with a hash, is ignored, and considered a comment
 
 //
 
-(to specify version):
-docker run redis:4.6.3
-(to run on interactive mode, without terminal):
-docker run -i [image name] 
-(ditto, with a pseudo terminal):
-docker un -it [image name]
-(to map ports):
-docker run -p 80:5000 my-app
-(to map directories to persist data after you delete the docker container):
-docker run -v /host/directory:/var/lib/mysql mysql
-(to check specific details of a container):
-docker inspect [container name]
-docker logs [container name]
-docker attach [container id]
+ANSIBLE:
+
+web ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=jjljsg@
+web ansible_host=server2.company.com ansible_connection=winrm ansible_user=admin ansible_password=Password123! 
+localhost ansible_connetion=localhost
 
 //
 
-docker build -t [name you want to give to the image] .
-docker push [image name]
+# Sample Inventory File
 
-//
+# Web Servers
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
 
-docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d kodekloud/simple-webapp
+# Database Servers
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+[web_servers]
+web1
+web2
+web3
+
+[db_servers]
+db1
+
+[all_servers:children]
+web_servers
+db_servers
