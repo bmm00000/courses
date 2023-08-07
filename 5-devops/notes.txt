@@ -203,6 +203,69 @@ Banana:
 
 ANSIBLE:
 
+Labs - FAQ
+If you are following along the demo to setup lab, please refer to the below troubleshooting tips:
+
+Only 32bit VMs are listed in Virtual Box
+While creating VMs in Virtual box if only 32 bit vms are listed, kindly check on the following:
+
+Check if Virtualization is enabled on your system. For this you must access the BIOS of your laptop and enable Virtualization if its not already enabled.
+
+Check if Hyper-V is enabled on your system. If it is, ensure that it is disabled as two virtualization technologies cannot co-exist.
+
+Issues installing Ansible and its dependencies
+Once the Debian VM is up and running make the following changes to the /etc/apt/sources.list file to get the Ansible installation working right.
+
+Comment the line starting deb cdrom
+
+Uncomment bottom two lines starting deb and deb-src
+
+Add the below two lines:
+
+deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+deb http://ftp.de.debian.org/debian sid main
+Final file:
+
+#
+# deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 DVD Binary-1 20170723-11:49]/ jessie contrib main
+#deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 DVD Binary-1 20170723-11:49]/ jessie contrib main
+#deb http://deb/debian.org/debian jessie main
+#deb-src http://deb.debian.org/debian stretch main
+deb http://security.debian.org/ jessie/updates main contrib
+deb-src http://security.debian.org/ jessie/updates main contrib
+# jessie-updates, previously known as 'volatile'
+# A network mirror was not selected during install.  The following entries
+# are provided as examples, but you should amend them as appropriate
+# for your mirror of choice.
+#
+deb http://ftp.debian.org/debian/ jessie-updates main contrib
+deb-src http://ftp.debian.org/debian/ jessie-updates main contrib
+deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+deb http://ftp.de.debian.org/debian sid main
+Once file is updated, run apt-get update and then run apt-get install ansible
+
+Enabling SSH on the VM
+If you need SSH enabled on the system, follow the below steps:
+
+Ensure the /etc/apt/sources.list file has been updated as per above
+
+Run the command: apt-get update 
+
+Run the command: apt-get install openssh-server
+
+Run the command: service sshd start
+
+FAQ
+I can not see the 64 bit versions of Operating Systems listed in Oracle VirtualBox
+
+Make sure you have Virtualization Feature Enabled on your laptop.
+
+I can not see the 64 bit versions even though virtualization is enabled 
+
+Turn off Hyper-V, in  "Turn Windows Features on or off" in control panel 
+
+//
+
 web ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=jjljsg@
 web ansible_host=server2.company.com ansible_connection=winrm ansible_user=admin ansible_password=Password123! 
 localhost ansible_connetion=localhost
@@ -230,3 +293,46 @@ db1
 [all_servers:children]
 web_servers
 db_servers
+
+// 
+
+(to access a remote machine):
+ssh 103.444.3.222
+(to exit from that remote machine):
+exit
+mkdir test-project
+cd test-project
+cat > inventory.txt
+target1 ansible_host=103.444.3.222 ansible_ssh_pass=pass123!
+(now we do a ping test, to test that you can connect to the target machine):
+ansible target1 -m ping -i inventory.txt
+
+//
+
+(how to run a playbook):
+ansible-playbook playbook.yml
+(info about additional parameters available for the former command):
+ansible-playbook --help
+(info about modules):
+ansible-doc -l
+
+//
+
+if you want to do one-off things with ansible (such as ping tests, reboot all hosts, execute just one command, etc.), you can use an imperative approach, by using commands, for example:
+ansible [hosts] -a [command]
+(automatically, ansible creates the 'all' group, encompassing all hosts):
+ansible all -a '/sbin/reboot'
+(when you want to use a module, you use the '-m' parameter):
+ansible [hosts] -m [module]
+(when you want to refer to the inventory file, you use the '-i' parameter):
+ansible all -m ping -i inventory.txt
+
+but ususally, we use the declarative approach by executing ansible playbooks that will contain all that we want to execute:
+ansible-playbook [playbook name].yml -i inventory.txt
+
+in the example, of our playbook in this folder:
+ansible-playbook -i inventory playbook-pingtest.yaml 
+
+//
+
+You can use 'ansible-doc' command to see the information about Ansible modules from command line.
