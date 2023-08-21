@@ -1,14 +1,10 @@
-ncal -3 -h
-(the former is the same as the following):
-ncal -3h
-
 to look for the meaning of any option in the manual:
 /[pattern]
 
 (to look manual about the manual):
 man man
 
-(to specify the section you want to look for, eg. in this case, we want to look for the comomand passwd in section 1):
+(to specify the section you want to look for, eg. in this case, we want to look for the command passwd in section 1):
 man 1 passwd
 
 in Windows, the root directory is not the top directory (you have the C drive, etc.), but in true-unix or unix-like systems, the root directory is the top directory.
