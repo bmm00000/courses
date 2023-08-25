@@ -1,5 +1,6 @@
 to look for the meaning of any option in the manual:
 /[pattern]
+(if you are looking for a word you can enter spaces before or after the word, so you will get the exact word)
 
 (to look manual about the manual):
 man man
@@ -9,3 +10,10 @@ man 1 passwd
 
 in Windows, the root directory is not the top directory (you have the C drive, etc.), but in true-unix or unix-like systems, the root directory is the top directory.
 
+in root directory, we find the following folders:
+bin: executable programs (eg. 'pwd'...)
+etc: configuration files and initialization scripts (you can configure cron jobs, the nano text editor, etc.)
+media: where we access removable media (usb drives, sd cards, dvds, cd roms, etc.)
+var: files that have to do with login info (generated log files in the 'syslog' file), outputs of other programs, cashes, etc.
+root (not to confuse with the top root directory): this is the home folder of the user called 'root'. if you are not the root or super user, you won't have persmission to access.
+usr: different libraries, executable files, programs, if you install software, new commands, etc. it will end up in this folder.
