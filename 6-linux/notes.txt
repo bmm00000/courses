@@ -17,3 +17,21 @@ media: where we access removable media (usb drives, sd cards, dvds, cd roms, etc
 var: files that have to do with login info (generated log files in the 'syslog' file), outputs of other programs, cashes, etc.
 root (not to confuse with the top root directory): this is the home folder of the user called 'root'. if you are not the root or super user, you won't have persmission to access.
 usr: different libraries, executable files, programs, if you install software, new commands, etc. it will end up in this folder.
+
+you can specify the path were you want a file to be created, for example:
+touch ../<filename>
+touch ~/<filename>
+
+if you 'touch' an existing file, it changes the access and modification date, but it does not modify the contents of the file.
+
+if you check 'filename' in wikipedia, you will see all the symbols that have meaning to the shell, therefore you should not use them when naming files (eg. spaces, interrogation symbol, etc.).
+
+backslash '\' is an escape character: it tells the shell that whatever comes after it, should not have any special meaning, it should be treated as plain text.
+
+when you are creating a directory, if you want to create parent directories as well:
+mkdir -p horses/stallions
+
+ls -R 
+(it prints recursively the contents of the directories inside of the pwd)
+
+if you explore the shortcuts in Nano, keep in mind that the nomenclature is old, for example, 'M' means meta key, which references a key in older computers. In current Macs, that is ESC. The same happens with other shortcuts.
