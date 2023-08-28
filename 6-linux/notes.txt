@@ -35,3 +35,12 @@ ls -R
 (it prints recursively the contents of the directories inside of the pwd)
 
 if you explore the shortcuts in Nano, keep in mind that the nomenclature is old, for example, 'M' means meta key, which references a key in older computers. In current Macs, that is ESC. The same happens with other shortcuts.
+
+rm -i (interactive: it asks you every time before a file gets deleted)
+
+mv dog.txt /Desktop/dogs/newdog.txt (here we are moving and renaming at the same time)
+
+cp -r oldFolder newFolder (here we are copying directories recursively) 
+
+(to know the number of commands you have in history):
+echo $HISTSIZE
