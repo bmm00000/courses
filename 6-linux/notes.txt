@@ -34,7 +34,10 @@ mkdir -p horses/stallions
 ls -R 
 (it prints recursively the contents of the directories inside of the pwd)
 
-if you explore the shortcuts in Nano, keep in mind that the nomenclature is old, for example, 'M' means meta key, which references a key in older computers. In current Macs, that is ESC. The same happens with other shortcuts.
+if you want to explore nano, you can 'man nano'
+if you want to save what you edit in nano, you use the Write Out shortcut (control o) (by the way, you don't need to type capital letters in the shortcuts with nano). you can also use control S to save (but in this case, it will save in the existing file, without asking you if you want to change the name of the file)
+if you type control g (get help), you will see all the shortcuts in nano: if you explore the shortcuts in Nano, keep in mind that the nomenclature is old, for example, 'M' means meta key, which references a key in older computers. In current Macs, that is ESC. The same happens with other shortcuts.
+to edit the nano config file, you need sudo permissions: 'sudo nano /etc/nanorc'. then you only need to remove the # symbol of the setting that you want to activate.
 
 rm -i (interactive: it asks you every time before a file gets deleted)
 
@@ -44,3 +47,8 @@ cp -r oldFolder newFolder (here we are copying directories recursively)
 
 (to know the number of commands you have in history):
 echo $HISTSIZE
+
+with 'less', you can search for terms using '/<term>', as we did when we are using 'cat'
+
+tail -f <filename> (it 'follows' the file, it listens to the file, so if new content appears on the file, it will print it immediately)
+(this is useful if you are monitoring logs)
