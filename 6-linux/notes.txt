@@ -14,7 +14,7 @@ in root directory, we find the following folders:
 bin: executable programs (eg. 'pwd'...)
 etc: configuration files and initialization scripts (you can configure cron jobs, the nano text editor, etc.)
 media: where we access removable media (usb drives, sd cards, dvds, cd roms, etc.)
-var: files that have to do with login info (generated log files in the 'syslog' file), outputs of other programs, cashes, etc.
+var: files that have to do with login info (generated log files in the 'syslog' file), outputs of other programs, caches, etc.
 root (not to confuse with the top root directory): this is the home folder of the user called 'root'. if you are not the root or super user, you won't have persmission to access.
 usr: different libraries, executable files, programs, if you install software, new commands, etc. it will end up in this folder.
 
@@ -36,6 +36,7 @@ ls -R
 
 if you want to explore nano, you can 'man nano'
 if you want to save what you edit in nano, you use the Write Out shortcut (control o) (by the way, you don't need to type capital letters in the shortcuts with nano). you can also use control S to save (but in this case, it will save in the existing file, without asking you if you want to change the name of the file)
+if you 'nano <filename>' and the file does not exist yet, it creates it when you save it
 if you type control g (get help), you will see all the shortcuts in nano: if you explore the shortcuts in Nano, keep in mind that the nomenclature is old, for example, 'M' means meta key, which references a key in older computers. In current Macs, that is ESC. The same happens with other shortcuts.
 to edit the nano config file, you need sudo permissions: 'sudo nano /etc/nanorc'. then you only need to remove the # symbol of the setting that you want to activate.
 
@@ -52,3 +53,48 @@ with 'less', you can search for terms using '/<term>', as we did when we are usi
 
 tail -f <filename> (it 'follows' the file, it listens to the file, so if new content appears on the file, it will print it immediately)
 (this is useful if you are monitoring logs)
+
+//
+
+you can redirect to a file that already exists or otherwise it will create it. 
+when you redirect, it re-writes the file (it deletes what it was written before)
+
+IF YOU WANT TO APPEND ERRORS:
+cat nonexistingfile 2>> errors.txt
+
+if you are redirecting standard output and standard error in the same line, you need to redirect standard output before the standard error.
+
+the 'tr' command requires data as standard input. for example
+cat file.txt | tr a A
+(this substitutes 'a' for 'A')
+
+//
+
+echo *
+(this will print all the files of the pwd, so we can also do the following):
+echo *.js
+(the former will give you all the files of the pwd that end in '.js')
+
+echo ~
+(this will expand into my home directory path, for example):
+home/myname
+
+echo ~kitty
+(this will print the path of the home directory for the user kitty, for example):
+home/kitty
+
+echo {Mon,Tue}-plan.txt
+(even though you don't have the following files yet, the 'echo' command will show you what would be produced):
+Mon-plan.txt Tue-plan.txt
+echo {Mon,Tue}-{Am,Pm}-plan.txt
+(the above will give you every possible combination)
+
+mkdir -p {Mon,Tue}/{Breakfast,Lunch,Dinner}
+(this will create Breakfast, Lunch, and Dinner folders inside the Mon and Tue folders (to create folders inside of the folders we use '-p'))
+
+alternative syntax for command subsitution:
+echo today is `date`
+
+//
+
+the 'sudo updatedb' command will update the database that 'locate' uses. 
