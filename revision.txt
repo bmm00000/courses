@@ -3,15 +3,8 @@ space rep/interleaving
 bigger chunks
 ellaboration/generation
 
-1- SAME DAY: build projects to re-build in the future, take notes to re-read, take note of videos or sections to re-watch, note in anki?
-if needed, compare with code in repos after I build projects on my own:
-https://github.com/academind/js-testing-practical-guide-code/tree/main
-https://github.com/academind/react-complete-guide-code
+build projects to re-build in the future (if needed, compare with code in course repo after I build projects on my own).
+take notes to re-read
+take note of videos or sections to re-watch
+download relevant slides.
 
-2- ANOTHER DAY (check anki?): re-build, and then compare with my old code, and also check slides in repos above.
-
-
-
-
-bonny testing course
-mosh react courses
