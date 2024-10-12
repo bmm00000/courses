@@ -6,7 +6,7 @@ import Post from "./Post";
 
 import classes from "./PostsList.module.css";
 
-function PostsList() {
+function PostsList({ modalIsShown, onHideModal }) {
   const [enteredAuthor, setEnteredAuthor] = useState("");
   const [enteredText, setEnteredText] = useState("");
 
@@ -20,12 +20,15 @@ function PostsList() {
 
   return (
     <>
-      <Modal>
-        <NewPost
-          onAuthorChange={authorChangeHandler}
-          onTextChange={textChangeHandler}
-        />
-      </Modal>
+      {modalIsShown && (
+        <Modal onClose={onHideModal}>
+          <NewPost
+            onAuthorChange={authorChangeHandler}
+            onTextChange={textChangeHandler}
+            onCancel={onHideModal}
+          />
+        </Modal>
+      )}
       <ul className={classes.posts}>
         <Post author={enteredAuthor} text={enteredText} />
         <Post author="Peter" text="This is Peter's post" />
