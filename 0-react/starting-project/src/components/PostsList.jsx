@@ -1,39 +1,32 @@
-import { useState } from "react";
-
-import Modal from "./Modal";
-import NewPost from "./NewPost";
 import Post from "./Post";
 
 import classes from "./PostsList.module.css";
 
-function PostsList({ modalIsShown, onHideModal }) {
-  const [enteredAuthor, setEnteredAuthor] = useState("");
-  const [enteredText, setEnteredText] = useState("");
-
-  function authorChangeHandler(event) {
-    setEnteredAuthor(event.target.value);
-  }
-
-  function textChangeHandler(event) {
-    setEnteredText(event.target.value);
-  }
-
+function PostsList({ posts, isLoading }) {
   return (
     <>
-      {modalIsShown && (
-        <Modal onClose={onHideModal}>
-          <NewPost
-            onAuthorChange={authorChangeHandler}
-            onTextChange={textChangeHandler}
-            onCancel={onHideModal}
-          />
-        </Modal>
+      {isLoading && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <p>Loading...</p>
+        </div>
       )}
-      <ul className={classes.posts}>
-        <Post author={enteredAuthor} text={enteredText} />
-        <Post author="Peter" text="This is Peter's post" />
-        <Post author="Georgia" text="This is Georgia's post" />
-      </ul>
+      {!isLoading && !posts.length && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet</h2>
+          <p>Why don't you add some?</p>
+        </div>
+      )}
+      {!isLoading && posts.length && (
+        <ul className={classes.posts}>
+          {posts.map((post) => (
+            <Post
+              key={`${post.author}-${post.text}-${Math.random()}`}
+              author={post.author}
+              text={post.text}
+            />
+          ))}
+        </ul>
+      )}
     </>
   );
 }
