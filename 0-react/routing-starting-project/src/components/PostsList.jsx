@@ -1,22 +1,20 @@
-import Post from "./Post";
+import { useLoaderData } from "react-router-dom";
 
+import Post from "./Post";
 import classes from "./PostsList.module.css";
 
-function PostsList({ posts, isLoading }) {
+function PostsList() {
+  const posts = useLoaderData();
+
   return (
     <>
-      {isLoading && (
-        <div style={{ textAlign: "center", color: "white" }}>
-          <p>Loading...</p>
-        </div>
-      )}
-      {!isLoading && !posts.length && (
+      {!posts.length && (
         <div style={{ textAlign: "center", color: "white" }}>
           <h2>There are no posts yet</h2>
           <p>Why don't you add some?</p>
         </div>
       )}
-      {!isLoading && posts.length && (
+      {posts.length && (
         <ul className={classes.posts}>
           {posts.map((post) => (
             <Post

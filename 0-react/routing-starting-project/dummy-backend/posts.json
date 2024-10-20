@@ -1,1 +1,34 @@
-{"posts":[{"author":"John","text":"This is the first post","id":"0.3745751825367385"},{"author":"Charlie","text":"This is the second post","id":"0.6165423630391145"},{"author":"George","text":"This is the third post","id":"0.6424973576076294"},{"author":"Vlada","text":"This is the forth post","id":"0.9735085668959009"},{"author":"Donny","text":"This is the fifth post","id":"0.09375315020453612"},{"author":"Sandro","text":"This is the sixth post","id":"0.5013279074310844"}]}
+{
+  "posts": [
+    {
+      "author": "John",
+      "text": "This is the first post",
+      "id": "0.3745751825367385"
+    },
+    {
+      "author": "Charlie",
+      "text": "This is the second post",
+      "id": "0.6165423630391145"
+    },
+    {
+      "author": "George",
+      "text": "This is the third post",
+      "id": "0.6424973576076294"
+    },
+    {
+      "author": "Vlada",
+      "text": "This is the forth post",
+      "id": "0.9735085668959009"
+    },
+    {
+      "author": "Donny",
+      "text": "This is the fifth post",
+      "id": "0.09375315020453612"
+    },
+    {
+      "author": "Sandro",
+      "text": "This is the sixth post",
+      "id": "0.5013279074310844"
+    }
+  ]
+}
