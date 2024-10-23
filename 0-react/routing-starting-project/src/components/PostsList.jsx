@@ -18,7 +18,8 @@ function PostsList() {
         <ul className={classes.posts}>
           {posts.map((post) => (
             <Post
-              key={`${post.author}-${post.text}-${Math.random()}`}
+              key={post.id}
+              id={post.id}
               author={post.author}
               text={post.text}
             />
